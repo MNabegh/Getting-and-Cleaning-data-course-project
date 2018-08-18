@@ -21,9 +21,7 @@ folderName = "UCI HAR Dataset"
 if(!file.exists(folderName))
     unzip(destFile)
 
-rm(destFile)
-rm(folderName)
-rm(fileUrl)
+rm(destFile, folderName, fileUrl)
 
 #------------------------------------------------------------------------------------------------------------------
 # 2. Read data into R
@@ -41,10 +39,10 @@ train_subjects_numbers = read.table("./UCI HAR Dataset/train/subject_train.txt",
 
 test_data = data.table::fread("./UCI HAR Dataset/test/X_test.txt", select = columns_to_read, stringsAsFactors = F)
 test_labels = read.table("./UCI HAR Dataset/test/y_test.txt", stringsAsFactors = F)
-test_subject_numebrs = read.table("./UCI HAR Dataset/test/subject_test.txt", stringsAsFactors = F)
+test_subjects_numbers = read.table("./UCI HAR Dataset/test/subject_test.txt", stringsAsFactors = F)
 
 activity_levels = read.table(".//UCI HAR Dataset/activity_labels.txt")
-rm(columns_to_readfeat)
+rm(columns_to_read)
 
 #------------------------------------------------------------------------------------------------------------------
 # 3. Change feature names to be more descriptive
@@ -65,19 +63,26 @@ features_names = sub("Freq", "Frequency", features_names)
 # 4. Change the activities values to factors with labels
 #------------------------------------------------------------------------------------------------------------------
 
-test_labels = factor(test_labels, levels = activity_levels[,1], labels = activity_levels[,2])
-train_labels = factor(train_labels, levels = activity_levels[,1], labels = activity_levels[,2])
+test_labels = factor(as.numeric(test_labels[,1]), levels = as.numeric(activity_levels[,1]),
+                     labels = activity_levels[,2])
+train_labels = factor(as.numeric(train_labels[,1]), levels = as.numeric(activity_levels[,1]),
+                      labels = activity_levels[,2])
 
 rm(activity_levels)
 
 #------------------------------------------------------------------------------------------------------------------
 # 5. Merge the dataset
 #------------------------------------------------------------------------------------------------------------------
+train_data = cbind(train_subjects_numbers, train_labels, train_data)
+test_data = cbind(test_subjects_numbers, test_labels, test_data)
 
+colnames(train_data) = c("subjectNumber", "activityName", features_names)
+colnames(test_data) = c("subjectNumber", "activityName", features_names)
 
+combined_data = rbind(train_data, test_data)
 
-
-
+rm(train_subjects_numbers, train_labels, train_data, features_names, 
+   test_data, test_labels, test_subjects_numbers)
 
 
 
