@@ -15,11 +15,11 @@ Each row contains, for a given subject and activity name, 79 mean of recorded si
 
 ### Identifiers <a name="identifiers"></a>
 
-- **subject**
+- **subjectNumber**
 
 	Subject identifier, integer, ranges from 1 to 30.
 
-- **activity**
+- **activityName**
 
 	Activity identifier, string with 6 possible values: 
 	1. **WALKING**: subject was walking
@@ -186,3 +186,4 @@ The following operations where done to tidy the dataset and get a more ready to 
 	- The initials *t* and *f* were replaced with *timeDomain* and *frequencyDomain* respectively.
 	- *Acc*, *Gyro*, *Mag*, *Freq*, *mean*, *std* and *BodyBody* were replaced with *Accelerometer*, *Gyroscope*, *Magnitude*, *Frequency*, *Mean*, *StandardDeviation* and *Body*.
 1. Change activities to factor and add apporopriate labels.
+1. Merge the train and test datasets.
