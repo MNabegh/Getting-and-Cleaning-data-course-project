@@ -1,7 +1,7 @@
 #------------------------------------------------------------------------------------------------------------------
 # John Hopkins coursera data science specilization, Getting and Cleanning data course
 # project.
-#
+#------------------------------------------------------------------------------------------------------------------
 
 
 library(dplyr)
@@ -73,6 +73,7 @@ rm(activity_levels)
 #------------------------------------------------------------------------------------------------------------------
 # 5. Merge the dataset
 #------------------------------------------------------------------------------------------------------------------
+
 train_data = cbind(train_subjects_numbers, train_labels, train_data)
 test_data = cbind(test_subjects_numbers, test_labels, test_data)
 
@@ -84,9 +85,11 @@ combined_data = rbind(train_data, test_data)
 rm(train_subjects_numbers, train_labels, train_data, features_names, 
    test_data, test_labels, test_subjects_numbers)
 
+#------------------------------------------------------------------------------------------------------------------
+# 6. Summarize the data set
+#------------------------------------------------------------------------------------------------------------------
 
+summarized_data_set = combined_data %>% group_by(subjectNumber, activityName) %>% 
+    summarize_at(-(1:2), funs(mean))
 
-
-
-
-
+write.table(summarized_data_set, file = "tidy_data.txt",row.names = F, quote = F)
