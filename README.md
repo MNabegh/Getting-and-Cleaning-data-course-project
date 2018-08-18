@@ -36,3 +36,6 @@ A code book that describes the variables, the data, and any transformations or w
 ### Tidy data
 
 Tidy and summarized output data produced by the R script after operating on the original data and saved in `tidy_data.txt`.
+
+## Environment
+R version 3.2.3, Ubuntu Desktop 16.04 OS, Rstudio  1.1.423 and dplyr package 0.7.6.
