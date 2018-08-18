@@ -187,3 +187,5 @@ The following operations where done to tidy the dataset and get a more ready to 
 	- *Acc*, *Gyro*, *Mag*, *Freq*, *mean*, *std* and *BodyBody* were replaced with *Accelerometer*, *Gyroscope*, *Magnitude*, *Frequency*, *Mean*, *StandardDeviation* and *Body*.
 1. Change activities to factor and add apporopriate labels.
 1. Merge the train and test datasets.
+1. Summarize the data by calculating the mean of all of the measurements for each subject and activity.
+1. Write the data to `tidy_data.txt` file.
