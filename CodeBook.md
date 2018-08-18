@@ -33,7 +33,7 @@ Each row contains, for a given subject and activity name, 79 mean of recorded si
 
 All measurements are floating-point values, normalised and bounded within [-1,1].
 
-All the measurements in the `tidy_dataset.txt` file are the mean of all the recorded values.
+All the measurements in the `tidy_data.txt` file are the mean of all the recorded values.
 
 Some Magnitudes are three dimensional X, Y and Z.
 
@@ -109,7 +109,7 @@ The measurements are recorded in time domain as reported by the devices and the 
 	- *timeDomainBodyGyroscopeJerkMagnitudeMean*
 	- *timeDomainBodyGyroscopeJerkMagnitudeStandardDeviation*
 
-#### Frequency-domain signals
+#### Frequency domain signals
 
 - Mean, standard deviation and weighted average of frequency-domain body acceleration in the X, Y and Z directions:
 
