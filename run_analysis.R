@@ -21,15 +21,21 @@ folderName = "UCI HAR Dataset"
 if(!file.exists(folderName))
     unzip(destFile)
 
+rm(destFile)
+rm(folderName)
+rm(fileUrl)
+
 #------------------------------------------------------------------------------------------------------------------
 # 2. Read data into R
 #------------------------------------------------------------------------------------------------------------------
 
-features_names = select(read.table("./UCI HAR Dataset/features.txt", col.names = c("order", "feature_name"), stringsAsFactors = F), "feature_name")
+features_names = select(read.table("./UCI HAR Dataset/features.txt", 
+                                   col.names = c("order", "feature_name"), stringsAsFactors = F), "feature_name")
 columns_to_read = grep("mean|std", features_names[,1])
 features_names = features_names[columns_to_read, ]
 
-train_data = data.table::fread("./UCI HAR Dataset/train/X_train.txt", select = columns_to_read, stringsAsFactors = F)
+train_data = data.table::fread("./UCI HAR Dataset/train/X_train.txt",
+                               select = columns_to_read, stringsAsFactors = F)
 train_labels = read.table("./UCI HAR Dataset/train/y_train.txt", stringsAsFactors = F)
 train_subjects_numbers = read.table("./UCI HAR Dataset/train/subject_train.txt", stringsAsFactors = F)
 
@@ -38,4 +44,31 @@ test_labels = read.table("./UCI HAR Dataset/test/y_test.txt", stringsAsFactors =
 test_subject_numebrs = read.table("./UCI HAR Dataset/test/subject_test.txt", stringsAsFactors = F)
 
 activity_levels = read.table(".//UCI HAR Dataset/activity_labels.txt")
-    
+rm(columns_to_read)
+
+#------------------------------------------------------------------------------------------------------------------
+# 3. Change feature names to be more descriptive
+#------------------------------------------------------------------------------------------------------------------
+
+features_names = sub("^t", "timeDomain", features_names)
+features_names = sub("^f", "frequencyDomain", features_names)
+features_names = sub("-m", "M", features_names)
+features_names = sub("-std", "StandardDeviation", features_names)
+features_names = sub("\\()", "", features_names)
+features_names = sub("-", "", features_names)
+features_names = sub("Acc", "Accelerometer", features_names)
+features_names = sub("Gyro", "Gyroscope", features_names)
+features_names = sub("Mag", "Magnitude", features_names)
+features_names = sub("Freq", "Frequency", features_names)
+
+
+
+
+
+
+
+
+
+
+
+
