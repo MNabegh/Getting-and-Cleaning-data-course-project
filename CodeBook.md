@@ -185,4 +185,4 @@ The following operations where done to tidy the dataset and get a more ready to 
 	- Special characters dashes and parentheses (`-`, `(` and `)` ) were removed.
 	- The initials *t* and *f* were replaced with *timeDomain* and *frequencyDomain* respectively.
 	- *Acc*, *Gyro*, *Mag*, *Freq*, *mean*, *std* and *BodyBody* were replaced with *Accelerometer*, *Gyroscope*, *Magnitude*, *Frequency*, *Mean*, *StandardDeviation* and *Body*.
-1.
+1. Change activities to factor and add apporopriate labels.

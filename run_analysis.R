@@ -44,7 +44,7 @@ test_labels = read.table("./UCI HAR Dataset/test/y_test.txt", stringsAsFactors =
 test_subject_numebrs = read.table("./UCI HAR Dataset/test/subject_test.txt", stringsAsFactors = F)
 
 activity_levels = read.table(".//UCI HAR Dataset/activity_labels.txt")
-rm(columns_to_read)
+rm(columns_to_readfeat)
 
 #------------------------------------------------------------------------------------------------------------------
 # 3. Change feature names to be more descriptive
@@ -60,6 +60,19 @@ features_names = sub("Acc", "Accelerometer", features_names)
 features_names = sub("Gyro", "Gyroscope", features_names)
 features_names = sub("Mag", "Magnitude", features_names)
 features_names = sub("Freq", "Frequency", features_names)
+
+#------------------------------------------------------------------------------------------------------------------
+# 4. Change the activities values to factors with labels
+#------------------------------------------------------------------------------------------------------------------
+
+test_labels = factor(test_labels, levels = activity_levels[,1], labels = activity_levels[,2])
+train_labels = factor(train_labels, levels = activity_levels[,1], labels = activity_levels[,2])
+
+rm(activity_levels)
+
+#------------------------------------------------------------------------------------------------------------------
+# 5. Merge the dataset
+#------------------------------------------------------------------------------------------------------------------
 
 
 
